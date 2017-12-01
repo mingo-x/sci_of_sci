@@ -21,8 +21,8 @@ for idx in range(9):
 						fos = a["fos"]
 						for f in fos:
 							fos_set.add(f)
-					if a_count%1000000==0:
-						print(a_count)
+					if a_count%100000==0:
+						print(a_count,len(fos_set),time.time()-start_time)
 			end_time = time.time()
 			print(end_time-start_time)
 
