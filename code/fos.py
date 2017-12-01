@@ -14,7 +14,7 @@ for idx in range(9):
 			start_time = time.time()
 			a_count = 0
 			with myzip.open(file_name) as fin:
-				for line in myzip:
+				for line in fin:
 					a_count += 1
 					a = json.loads(line)
 					if "fos" in a:
