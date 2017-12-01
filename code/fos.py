@@ -16,7 +16,7 @@ for idx in range(9):
 			with myzip.open(file_name) as fin:
 				for line in fin:
 					a_count += 1
-					a = json.loads(line)
+					a = json.loads(line.decode('utf-8'))
 					if "fos" in a:
 						fos = a["fos"]
 						for f in fos:
