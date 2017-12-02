@@ -15,7 +15,8 @@ no_count = 0
 for line in f_mag:
 	fos_name = line[:-1]
 	if fos_name in fos_dict:
-		print(fos_name, fos_dict[fos_name])
+		a = 1
+		#print(fos_name, fos_dict[fos_name])
 	else:
 		print(fos_name,"no corresponding")
 		no_count += 1
