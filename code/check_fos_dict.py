@@ -6,7 +6,7 @@ for line in f_kdd:
 	fos_id = line[0:8]
 	fos_name = line[9:-1]
 	print(fos_id,fos_name)
-	fos_dict[fos_id] = fos_name
+	fos_dict[fos_name] = fos_id
 f_kdd.close()
 
 #check fos_mag
