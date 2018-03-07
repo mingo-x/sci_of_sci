@@ -21,7 +21,7 @@ def print_top_words(model, feature_names, n_top_words):
 
 # build content
 content = []
-for idx in range(2):
+for idx in range(1):
 	with ZipFile(dir_path+"/data/mag_papers_"+str(idx)+".zip", "r") as myzip:
 		zip_files = myzip.namelist()
 		for file_name in zip_files:
@@ -34,6 +34,7 @@ for idx in range(2):
 						content.append(a["abstract"])
 			end_time = time()
 			print(end_time-start_time, len(content))
+			break
 
 n_samples = len(content)
 
