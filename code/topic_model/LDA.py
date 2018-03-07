@@ -7,7 +7,7 @@ from sklearn.decomposition import LatentDirichletAllocation
 
 
 dir_path = "/mnt/ds3lab/yanping/mag"
-n_features = 3000
+n_features = 1000
 n_components = 300
 n_top_words = 20
 
