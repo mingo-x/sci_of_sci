@@ -3,8 +3,8 @@
 
 import json
 import pickle
-#from stemming.porter2 import stem
-from nltk.stem import PorterStemmer
+from stemming.porter2 import stem
+#from nltk.stem import PorterStemmer
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
 venue_path = dir_path+"/venue.pkl"
