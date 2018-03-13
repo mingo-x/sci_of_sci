@@ -67,10 +67,9 @@ if __name__ == "__main__":
 		elif len(best_fos) > 0:
 			print("WARNING: more than 1 FOS")
 		mapping[venue] = best_fos
-		print(venue,)
+		print(venue, "---",)
 		for f in best_fos:
-			print(foss[f],)
-		print()
+			print(foss[f],";",)
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,out_path,pickle.HIGHEST_PROTOCOL)
 
