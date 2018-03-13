@@ -6,7 +6,7 @@ import pickle
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
 venue_path = dir_path+"/venue.pkl"
-fos_path = dir_path+"/fos.txt"
+fos_path = dir_path+"/FieldOfStudy.txt"
 out_path = dir_path+"/venue_fos.pkl"
 
 # jaccard similarity
@@ -27,6 +27,7 @@ def load_fos(path):
 	with open(path,"r") as fin:
 		for line in fin:
 			parts = line.split("\t")
+
 			dic[parts[0]] = parts[1]
 	return dic
 
