@@ -10,6 +10,7 @@ dir_path = "/mnt/ds3lab/yanping/mag/data"
 venue_path = dir_path+"/venue.pkl"
 fos_path = dir_path+"/FieldsOfStudy.txt"
 out_path = dir_path+"/venue_fos.pkl"
+fos_level_path = dir_path+"/fos_level.pkl"
 
 # jaccard similarity
 def j_sim(venue,fos):
@@ -52,6 +53,8 @@ if __name__ == "__main__":
 	for key in foss:
 		fos_sets[key] = split_and_stem(foss[key])
 	mapping = {}
+	with open(fos_level_path,"rb") as fin:
+		fos_level = pickle.load(fin)
 	for venue in venues:
 		best_score = 0.0
 		best_hit = 0
@@ -68,13 +71,11 @@ if __name__ == "__main__":
 				best_fos.append(fos)
 			elif score == best_score and score != 0:
 				best_fos.append(fos)
-		if len(best_fos) == 0:
-			print("WARNING: 0 FOS")
-		elif len(best_fos) > 1:
-			print("WARNING: more than 1 FOS")
 		mapping[venue] = best_fos
 		print("---",venue)
 		for f in best_fos:
+			if fos_level[f] == 0:
+				print("*********WARNING L0 FOS*******")
 			print("***",f,foss[f])
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,out_path,pickle.HIGHEST_PROTOCOL)
