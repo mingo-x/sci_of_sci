@@ -34,29 +34,29 @@ def load_fos(path):
 	return dic
 
 # split string to set of words
-def split_and_stem(s,ps):
+def split_and_stem(s):
 	words = s.lower().split(" ")
 	word_set = set()
 	
 	for w in words:
-		word_set.add(ps.stem(w))
+		word_set.add(stem(w))
 	return word_set
 
 
 if __name__ == "__main__":
-	ps = PorterStemmer()
+	#ps = PorterStemmer()
 	venues = load_venue(venue_path)
 	foss = load_fos(fos_path)
 	# turn fos string into set
 	fos_sets = {}
 	for key in foss:
-		fos_sets[key] = split_and_stem(foss[key],ps)
+		fos_sets[key] = split_and_stem(foss[key])
 	mapping = {}
 	for venue in venues:
 		best_score = 0.0
 		best_hit = 0
 		best_fos = []
-		venue_set = split_and_stem(venue,ps)
+		venue_set = split_and_stem(venue)
 		res = {}
 		# iterate over fos_sets
 		for fos in fos_sets:
