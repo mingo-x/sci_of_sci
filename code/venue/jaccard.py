@@ -13,7 +13,7 @@ out_path = dir_path+"/venue_fos.pkl"
 
 # jaccard similarity
 def j_sim(venue,fos):
-	return 1.0*len(venue & fos)/len(venue | fos)
+	return 1.0*len(venue & fos)/len(venue | fos), len(venue & fos)
 
 # load venues
 def load_venue(path):
@@ -54,14 +54,16 @@ if __name__ == "__main__":
 	mapping = {}
 	for venue in venues:
 		best_score = 0.0
+		best_hit = 0
 		best_fos = []
 		venue_set = split_and_stem(venue,ps)
 		res = {}
 		# iterate over fos_sets
 		for fos in fos_sets:
-			score = j_sim(venue_set,fos_sets[fos])
-			if score > best_score:
+			score, hit = j_sim(venue_set,fos_sets[fos])
+			if score > best_score or (score==best_score and hit>best_hit):
 				best_score = score
+				best_hit = hit
 				del best_fos[:]
 				best_fos.append(fos)
 			elif score == best_score and score != 0:
