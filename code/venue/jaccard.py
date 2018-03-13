@@ -12,14 +12,21 @@ out_path = dir_path+"/venue_fos.json"
 def j_sim(venue,fos):
 	return 1.0*len(venue & fos)/len(venue | fos)
 
-# load venues/foss
-def load_dict(path):
-	dict = []
+# load venues
+def load_venue(path):
+	dic = []
 	with open(path,"r") as fin:
 		for line in fin:
-			dict.append(line)
-	return dict
+			dic.append(line)
+	return dic
 
+def load_fos(path):
+	dic = {}
+	with open(path,"r") as fin:
+		for line in fin:
+			parts = line.split("\t")
+			dic[parts[0]] = parts[1]
+	return dic
 
 # split string to set of words
 def split(s):
@@ -31,12 +38,12 @@ def split(s):
 
 
 if __name__ == "__main__":
-	venues = load_dict(venue_path)
-	foss = load_dict(fos_path)
+	venues = load_venue(venue_path)
+	foss = load_fos(fos_path)
 	# turn fos string into set
 	fos_sets = {}
-	for fos in foss:
-		fos_sets[fos] = split(fos)
+	for key in foss:
+		fos_sets[key] = split(foss[key])
 	fout = open(out_path,"w")
 	for venue in venues:
 		best_score = 0.0
@@ -57,6 +64,9 @@ if __name__ == "__main__":
 			print("WARNING: 0 FOS")
 		res["fos"] = best_fos
 		fout.write(json.dumps(res))
-		print(venue,best_fos)
+		print(venue,)
+		for f in best_fos:
+			print(foss[f],)
+		print()
 	fout.close()
 
