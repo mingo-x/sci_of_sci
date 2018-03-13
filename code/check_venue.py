@@ -24,7 +24,7 @@ for idx in range(9):
 						if "fos" not in a:
 							no_fos += 1
 							no_venue_and_fos += 1
-					if "fos" not in a:
+					elif "fos" not in a:
 						no_fos += 1
 					if a_count%100000==0:
 						print(a_count,time.time()-start_time, no_venue, no_fos, no_venue_and_fos)

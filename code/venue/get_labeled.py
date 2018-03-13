@@ -4,8 +4,8 @@ import time
 
 dir_path = "/mnt/ds3lab/yanping/mag"
 
-out_labeled = dir_path+"/data/venue_labeled.json"
-out_unlabeled = dir_path+"/data/venue_unlabeled.json"
+out_labeled = open(dir_path+"/data/venue_labeled.json","w")
+out_unlabeled = open(dir_path+"/data/venue_unlabeled.json","w")
 
 for idx in range(9):
 	with ZipFile(dir_path+"/data/mag_papers_"+str(idx)+".zip", "r") as myzip:
@@ -24,11 +24,15 @@ for idx in range(9):
 						data["venue"] = a["venue"]
 					else:
 						print("WARNING: NO VENUE, id ", a["id"])
+						continue
+					if ""
 					if a_count%100000==0:
 						print(a_count,len(venue_set),time.time()-start_time)
 			end_time = time.time()
 			print(end_time-start_time)
 
+out_labeled.close()
+out_unlabeled.close()
 print("start writing out")
 
 fout = open(out_path,"w")
