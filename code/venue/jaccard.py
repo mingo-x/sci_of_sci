@@ -36,10 +36,9 @@ def load_fos(path):
 def split_and_stem(s):
 	words = s.lower().split(" ")
 	word_set = set()
-	print("$$$",s)
+	
 	for w in words:
 		word_set.add(stem(w))
-		print(stem(w))
 	return word_set
 
 
@@ -67,12 +66,12 @@ if __name__ == "__main__":
 				best_fos.append(fos)
 		if len(best_fos) == 0:
 			print("WARNING: 0 FOS")
-		elif len(best_fos) > 0:
+		elif len(best_fos) > 1:
 			print("WARNING: more than 1 FOS")
 		mapping[venue] = best_fos
-		print(venue, "---",)
+		print("---",venue)
 		for f in best_fos:
-			print(foss[f],";",)
+			print("***",foss[f])
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,out_path,pickle.HIGHEST_PROTOCOL)
 
