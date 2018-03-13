@@ -1,6 +1,7 @@
 from zipfile import ZipFile
 import json
 import time
+import pickle
 
 dir_path = "/mnt/ds3lab/yanping/mag"
 
@@ -22,10 +23,8 @@ for idx in range(9):
 			print(end_time-start_time)
 
 print("start writing out")
-out_path = dir_path+"/data/venue.txt"
-fout = open(out_path,"w")
-start_time = time.time()
-for v in venue_set:
-	fout.write(v+"\n")
-print(time.time()-start_time)
-fout.close()
+out_path = dir_path+"/data/venue.pkl"
+with open(out_path,"wb") as fout:
+	start_time = time.time()
+	pickle.dump(venue_set,fout,pickle.HIGHEST_PROTOCOL)
+	print(time.time()-start_time)

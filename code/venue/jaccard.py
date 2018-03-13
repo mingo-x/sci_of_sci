@@ -62,6 +62,8 @@ if __name__ == "__main__":
 				best_fos.append(fos)
 		if len(best_fos) == 0:
 			print("WARNING: 0 FOS")
+		elif len(best_fos) > 0:
+			print("WARNING: more than 1 FOS")
 		res["fos"] = best_fos
 		fout.write(json.dumps(res))
 		print(venue,)
