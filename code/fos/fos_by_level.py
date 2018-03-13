@@ -2,22 +2,14 @@ import pickle
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
 hierarchy_file = dir_path + "/FieldOfStudyHierarchy.txt"
-level_set = [set(),set(),set(),set()]
+level = {}
 
 with open(hierarchy_file,"r") as fin:
 	for line in fin:
 		edge = line.split("\t")
-		level_set[int(edge[1][1])].add(edge[0])
-		level_set[int(edge[3][1])].add(edge[2])
+		level[edge[0]] = int(edge[1][1])
+		level[edge[2]] = int(edge[3][1])
 
-with open(dir_path+"/fos_l0.pkl","wb") as fout:
-	pickle.dump(level_set[0],fout,pickle.HIGHEST_PROTOCOL)
+with open(dir_path+"/fos_level.pkl","wb") as fout:
+	pickle.dump(level,fout,pickle.HIGHEST_PROTOCOL)
 
-with open(dir_path+"/fos_l1.pkl","wb") as fout:
-	pickle.dump(level_set[1],fout,pickle.HIGHEST_PROTOCOL)
-
-with open(dir_path+"/fos_l2.pkl","wb") as fout:
-	pickle.dump(level_set[2],fout,pickle.HIGHEST_PROTOCOL)
-
-with open(dir_path+"/fos_l3.pkl","wb") as fout:
-	pickle.dump(level_set[3],fout,pickle.HIGHEST_PROTOCOL)
