@@ -75,7 +75,7 @@ if __name__ == "__main__":
 		mapping[venue] = best_fos
 		print("---",venue)
 		for f in best_fos:
-			print("***",foss[f])
+			print("***",f,foss[f])
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,out_path,pickle.HIGHEST_PROTOCOL)
 
