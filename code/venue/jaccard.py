@@ -2,9 +2,10 @@
 # further improvement: n-gram, stem
 
 import json
+import pickle
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
-venue_path = dir_path+"/venue.txt"
+venue_path = dir_path+"/venue.pkl"
 fos_path = dir_path+"/fos.txt"
 out_path = dir_path+"/venue_fos.json"
 
@@ -15,9 +16,10 @@ def j_sim(venue,fos):
 # load venues
 def load_venue(path):
 	dic = []
-	with open(path,"r") as fin:
-		for line in fin:
-			dic.append(line)
+	with open(path,"rb") as fin:
+		venue_set = pickle.load(fin)
+		for v in venue_set:
+			dic.append(v)
 	return dic
 
 def load_fos(path):
@@ -58,7 +60,7 @@ if __name__ == "__main__":
 				best_score = score
 				del best_fos[:]
 				best_fos.append(fos)
-			elif score == best_score:
+			elif score == best_score and score != 0:
 				best_fos.append(fos)
 		if len(best_fos) == 0:
 			print("WARNING: 0 FOS")
