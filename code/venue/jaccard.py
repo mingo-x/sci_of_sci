@@ -6,7 +6,7 @@ import pickle
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
 venue_path = dir_path+"/venue.pkl"
-fos_path = dir_path+"/FieldOfStudy.txt"
+fos_path = dir_path+"/FieldsOfStudy.txt"
 out_path = dir_path+"/venue_fos.pkl"
 
 # jaccard similarity
