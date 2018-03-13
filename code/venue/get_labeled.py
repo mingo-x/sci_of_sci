@@ -23,9 +23,9 @@ for idx in range(9):
 					if "venue" in a:
 						data["venue"] = a["venue"]
 					else:
-						print("WARNING: NO VENUE, id ", a["id"])
+						#print("WARNING: NO VENUE, id ", a["id"])
 						continue
-					if ""
+					if "fos"
 					if a_count%100000==0:
 						print(a_count,len(venue_set),time.time()-start_time)
 			end_time = time.time()
@@ -33,6 +33,7 @@ for idx in range(9):
 
 out_labeled.close()
 out_unlabeled.close()
+
 print("start writing out")
 
 fout = open(out_path,"w")
