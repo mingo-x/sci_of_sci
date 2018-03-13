@@ -3,6 +3,7 @@
 
 import json
 import pickle
+from stemming.porter2 import stem
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
 venue_path = dir_path+"/venue.pkl"
@@ -32,11 +33,13 @@ def load_fos(path):
 	return dic
 
 # split string to set of words
-def split(s):
+def split_and_stem(s):
 	words = s.lower().split(" ")
 	word_set = set()
+	print("$$$",s)
 	for w in words:
-		word_set.add(w)
+		word_set.add(stem(w))
+		print(stem(w))
 	return word_set
 
 
@@ -46,12 +49,12 @@ if __name__ == "__main__":
 	# turn fos string into set
 	fos_sets = {}
 	for key in foss:
-		fos_sets[key] = split(foss[key])
+		fos_sets[key] = split_and_stem(foss[key])
 	mapping = {}
 	for venue in venues:
 		best_score = 0.0
 		best_fos = []
-		venue_set = split(venue)
+		venue_set = split_and_stem(venue)
 		res = {}
 		# iterate over fos_sets
 		for fos in fos_sets:
