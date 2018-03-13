@@ -33,7 +33,7 @@ def load_fos(path):
 
 # split string to set of words
 def split(s):
-	words = s.split(" ")
+	words = s.lower().split(" ")
 	word_set = set()
 	for w in words:
 		word_set.add(w)
