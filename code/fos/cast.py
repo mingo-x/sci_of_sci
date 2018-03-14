@@ -7,10 +7,10 @@ fos_level_path = dir_path+"/fos_level.pkl"
 fos_parent_path = dir_path+"/fos_parent.pkl"
 out_path = dir_path+"/venue_fos_l1.pkl"
 
-def get_pa(fos,fos_pa,fos_level):
+def get_pa(fos,fos_pa,fos_level,l):
 	pa = fos
 	pa_level = fos_level[fos]
-	while pa_level>1:
+	while pa_level>l:
 		if pa in fos_pa:
 			new_p = fos_pa[pa]
 			pa = new_p[0]
@@ -37,13 +37,21 @@ if __name__ == "__main__":
 		for fos in venue_fos[v]:
 			pa = fos
 			if fos_level[fos]>1:
-				pa = get_pa(fos,fos_pa,fos_level)
+				pa = get_pa(fos,fos_pa,fos_level,1)
 			cast_set.add(pa)
 		if len(cast_set) == 0:
 			counter_0 += 1
 		elif len(cast_set) > 1:
-			counter_1 += 1
-			#print("WARNING: more than 1 FOS")
+			# further up-casting to l0
+			print("---double casting---")
+			cast_set = set()
+			for fos in venue_fos[v]:
+				pa = fos
+				if fos_level[fos]>0:
+					pa = get_pa(fos,fos_pa,fos_level,0)
+				cast_set.add(pa)
+			if len(cast_set) > 1:
+				counter_1 += 1
 		print("******",v,len(cast_set))
 		mapping[v] = cast_set
 
