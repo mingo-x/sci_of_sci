@@ -8,7 +8,7 @@ with ZipFile(dir_path+"/data/mag_papers_0.zip", "r") as myzip:
 		with myzip.open(file_name) as fin:
 			print("***reading",file_name,"***")
 			while True:
-				for i in range(15):
+				for i in range(1):
 					line = fin.readline()
 					if not line:
 						print("***end of",file_name,"***")
