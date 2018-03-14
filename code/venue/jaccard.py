@@ -4,6 +4,7 @@
 import json
 import pickle
 from stemming.porter2 import stem
+from time import time
 #from nltk.stem import PorterStemmer
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
@@ -55,6 +56,9 @@ if __name__ == "__main__":
 	mapping = {}
 	with open(fos_level_path,"rb") as fin:
 		fos_level = pickle.load(fin)
+	counter_0 = 0
+	counter_1 = 0
+	start_time = time()
 	for venue in venues:
 		best_score = 0.0
 		best_hit = 0
@@ -72,9 +76,16 @@ if __name__ == "__main__":
 			elif score == best_score and score != 0:
 				best_fos.append(fos)
 		mapping[venue] = best_fos
+		if len(best_fos) == 0:
+			counter_0 += 1
+		elif len(best_fos) > 1:
+			counter_1 += 1
 		print("---",venue)
 		for f in best_fos:
 			print("***",f,foss[f])
+	print("0 FOS:",counter_0)
+	print("more than 1 FOS:",counter_1)
+	print("time:",time()-start_time)
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,out_path,pickle.HIGHEST_PROTOCOL)
 
