@@ -6,6 +6,7 @@ import pickle
 dir_path = "/mnt/ds3lab/yanping/mag"
 
 venue_set = set()
+non_en_count = 0
 
 for idx in range(9):
 	with ZipFile(dir_path+"/data/mag_papers_"+str(idx)+".zip", "r") as myzip:
@@ -17,6 +18,9 @@ for idx in range(9):
 				for line in fin:
 					a = json.loads(line.decode('utf-8'))
 					if "venue" in a:
+						if "lang" in a and a["lang"]!="en":
+							non_en_count += 1
+							continue
 						venue_set.add(a["venue"])
 			print(len(venue_set))
 			end_time = time.time()
@@ -28,3 +32,4 @@ with open(out_path,"wb") as fout:
 	start_time = time.time()
 	pickle.dump(venue_set,fout,pickle.HIGHEST_PROTOCOL)
 	print(time.time()-start_time)
+print("non english papers:",non_en_count)
