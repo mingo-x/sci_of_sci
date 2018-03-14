@@ -42,19 +42,28 @@ def split_and_stem(s,stopword):
 	word_set = set()
 	
 	for w in words:
-		nw = stem(w)
-		if nw in stopword:
+		if w in stopword:
 			continue
-		word_set.add(nw)
+		word_set.add(stem(w))
 	#print(len(words),len(word_set))
 	return word_set
 
+def get_stopword():
+	# stopwords
+	stopword = stopwords.words("english")
+	stopword.add("journal")
+	stopword.add("proceedings")
+	stopword.add("conference")
+	stopword.add("yearly")
+	stopword.add("quarterly")
+	stopword.add("monthly")
+	stopword.add("weekly")
+	return stopword
 
 if __name__ == "__main__":
 	#ps = PorterStemmer()
-	# stopwords
-	stopword = stopwords.words("english")
-	#stopword.add("journal")
+	stopword = get_stopword()
+
 	venues = load_venue(venue_path)
 	foss = load_fos(fos_path)
 	# turn fos string into set
