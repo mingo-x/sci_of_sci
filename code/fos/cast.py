@@ -36,7 +36,7 @@ if __name__ == "__main__":
 		cast_set = set()
 		for fos in venue_fos[v]:
 			pa = fos
-			if fos_level[fos]>1:
+			if fos in fos_level and fos_level[fos]>1:
 				pa = get_pa(fos,fos_pa,fos_level,1)
 			cast_set.add(pa)
 		if len(cast_set) == 0:
@@ -47,7 +47,7 @@ if __name__ == "__main__":
 			cast_set = set()
 			for fos in venue_fos[v]:
 				pa = fos
-				if fos_level[fos]>0:
+				if fos in fos_level and fos_level[fos]>0:
 					pa = get_pa(fos,fos_pa,fos_level,0)
 				cast_set.add(pa)
 			if len(cast_set) > 1:
