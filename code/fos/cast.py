@@ -56,6 +56,8 @@ if __name__ == "__main__":
 		print("******",v,old_len,len(cast_set))
 		mapping[v] = cast_set
 
+	print("no FOS:",counter_0)
+	print("more than 1 FOS:",counter_1)
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,fout,pickle.HIGHEST_PROTOCOL)
 
