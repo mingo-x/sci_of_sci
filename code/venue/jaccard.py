@@ -52,7 +52,9 @@ def split_and_stem(s,stopword):
 
 if __name__ == "__main__":
 	#ps = PorterStemmer()
+	# stopwords
 	stopword = stopwords.words("english")
+	#stopword.add("journal")
 	venues = load_venue(venue_path)
 	foss = load_fos(fos_path)
 	# turn fos string into set
@@ -91,11 +93,11 @@ if __name__ == "__main__":
 		for f in best_fos:
 			print("***",f,foss[f])
 		total += 1
-		if total == 10000:
+		if total == 1000:
 			break
 	print("0 FOS:",counter_0)
 	print("more than 1 FOS:",counter_1)
 	print("time:",time()-start_time)
 	with open(out_path,"wb") as fout:
-		pickle.dump(mapping,out_path,pickle.HIGHEST_PROTOCOL)
+		pickle.dump(mapping,fout,pickle.HIGHEST_PROTOCOL)
 
