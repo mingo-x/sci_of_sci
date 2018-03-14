@@ -74,11 +74,6 @@ if __name__ == "__main__":
 		mapping[venue] = best_fos
 		print("---",venue)
 		for f in best_fos:
-			if f in fos_level:
-				if fos_level[f] == 0:
-					print("*********WARNING L0 FOS*******")
-			else:
-				print("*********WARNING NO LEVEL*******")
 			print("***",f,foss[f])
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,out_path,pickle.HIGHEST_PROTOCOL)
