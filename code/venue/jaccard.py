@@ -64,6 +64,7 @@ if __name__ == "__main__":
 		fos_level = pickle.load(fin)
 	counter_0 = 0
 	counter_1 = 0
+	total = 0
 	start_time = time()
 	for venue in venues:
 		best_score = 0.0
@@ -89,6 +90,9 @@ if __name__ == "__main__":
 		print("---",venue)
 		for f in best_fos:
 			print("***",f,foss[f])
+		total += 1
+		if total == 10000:
+			break
 	print("0 FOS:",counter_0)
 	print("more than 1 FOS:",counter_1)
 	print("time:",time()-start_time)
