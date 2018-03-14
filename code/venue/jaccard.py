@@ -46,6 +46,7 @@ def split_and_stem(s,stopword):
 		if nw in stopword:
 			continue
 		word_set.add(nw)
+	print(len(words),len(word_set))
 	return word_set
 
 
