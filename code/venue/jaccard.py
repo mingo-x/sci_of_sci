@@ -50,7 +50,7 @@ def split_and_stem(s,stopword):
 def get_stopword():
 	# stopwords
 	stopword = stopwords.words("english")
-	stopword.extend(["journal","proceedings","conference","yearly","quarterly","monthly","weekly"])
+	stopword.extend(["journal","proceedings","conference","yearly","quarterly","monthly","weekly","research"])
 	return stopword
 
 if __name__ == "__main__":
