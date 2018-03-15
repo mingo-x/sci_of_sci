@@ -12,7 +12,10 @@ with open(venue_path,"rb") as fin:
 	for v in venue_set:
 		words = v.lower().split(" ")
 		for w in words:
-			venue_voc[w] += 1
+			if w in venue_voc:
+				venue_voc[w] += 1
+			else:
+				venue_voc[w] = 1
 print("###venue vocabulary")
 for v in venue_voc:
 	print(v,venue_voc[v])
@@ -26,7 +29,10 @@ with open(fos_path,"r") as fin:
 		parts = line[:-1].split("\t")
 		words = parts[1].lower().split(" ")
 		for w in words:
-			fos_voc[w] += 1
+			if w in fos_voc:
+				fos_voc[w] += 1
+			else:
+				fos_voc[w] = 1
 print("###fos vocabulary")
 for f in fos_voc:
 	print(f,fos_voc[f])
