@@ -69,12 +69,12 @@ if __name__ == "__main__":
 			'''
 		print("Venue:",v,len(venue_fos[v]),len(cast_set))
 		mapping[v] = cast_set
-		print("FOS before casting:")
+		#print("FOS before casting:")
 		for f in venue_fos[v]:
-			print("\t",fos_id[f])
-		print("FOS after casting")
+			print("----",fos_id[f])
+		#print("FOS after casting")
 		for f in cast_set:
-			print("\t",fos_id[f])
+			print("````",fos_id[f])
 
 	print("no FOS:",counter_0)
 	print("more than 1 FOS:",counter_1)
