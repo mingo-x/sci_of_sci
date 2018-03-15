@@ -39,11 +39,13 @@ if __name__ == "__main__":
 			if fos in fos_level and fos_level[fos]>1:
 				pa = get_pa(fos,fos_pa,fos_level,1)
 			cast_set.add(pa)
-		old_len = len(cast_set)
+		#old_len = len(cast_set)
 		if len(cast_set) == 0:
 			counter_0 += 1
 		elif len(cast_set) > 1:
+			counter_1 += 1
 			# further up-casting to l0
+			'''
 			print("---double casting---")
 			cast_set = set()
 			for fos in venue_fos[v]:
@@ -53,7 +55,8 @@ if __name__ == "__main__":
 				cast_set.add(pa)
 			if len(cast_set) > 1:
 				counter_1 += 1
-		print("******",v,old_len,len(cast_set))
+			'''
+		print("******",v,len(venue_fos[v]),len(cast_set))
 		mapping[v] = cast_set
 
 	print("no FOS:",counter_0)
