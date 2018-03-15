@@ -1,17 +1,19 @@
 import pickle
 import operator
+from nltk.tokenize import TweetTokenizer
 dir_path = "/mnt/ds3lab/yanping/mag/data"
 venue_path = dir_path+"/venue.pkl"
 fos_path = dir_path+"/FieldsOfStudy.txt"
 venue_voc_path = dir_path+"/venue_voc.pkl"
 fos_voc_path = dir_path+"/fos_voc.pkl"
 
+tknz = TweetTokenizer()
 # venue
 venue_voc = {}
 with open(venue_path,"rb") as fin:
 	venue_set = pickle.load(fin)
 	for v in venue_set:
-		words = v.lower().split(" ")
+		words = tknz.tokenize(v.lower())
 		for w in words:
 			if w in venue_voc:
 				venue_voc[w] += 1
@@ -28,7 +30,7 @@ fos_voc = {}
 with open(fos_path,"r") as fin:
 	for line in fin:
 		parts = line[:-1].split("\t")
-		words = parts[1].lower().split(" ")
+		words = tknz.tokenize(parts[1].lower())
 		for w in words:
 			if w in fos_voc:
 				fos_voc[w] += 1
