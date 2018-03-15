@@ -69,6 +69,8 @@ if __name__ == "__main__":
 			'''
 		print("******",v,len(venue_fos[v]),len(cast_set))
 		mapping[v] = cast_set
+		for f in venue_fos[v]:
+			print("``````",fos_id[f])
 		for f in cast_set:
 			print("------",fos_id[f])
 
