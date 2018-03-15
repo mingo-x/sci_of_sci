@@ -10,8 +10,8 @@ def get_hierarchy(path):
 		for line in fin:
 			edge = line.split("\t")
 			c_level = int(edge[1][1])
-			#if c_level<=1:
-			#	continue
+			if c_level<=1:
+				continue
 			p_level = int(edge[3][1])
 			c_id = edge[0]
 			p_id = edge[2]
@@ -20,8 +20,7 @@ def get_hierarchy(path):
 				old_p_level = pas[c_id][1]
 				old_weight = pas[c_id][2]
 
-				# if fos has an l1 parent, don't go further to l0
-				if (p_level<old_p_level and old_p_level!=1) or (p_level==old_p_level and weight>old_weight):
+				if (p_level<old_p_level and p_level>=1) or (p_level==old_p_level and weight>old_weight):
 					# update highest and heaviest parent
 					pas[c_id] = (p_id,p_level,weight)
 			else:
