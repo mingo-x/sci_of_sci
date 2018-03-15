@@ -6,6 +6,7 @@ import pickle
 from stemming.porter2 import stem
 from time import time
 from nltk.corpus import stopwords
+from nltk.tokenize import TweetTokenizer
 #from nltk.stem import PorterStemmer
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
@@ -36,8 +37,8 @@ def load_fos(path):
 	return dic
 
 # split string to set of words
-def split_and_stem(s,stopword):
-	words = s.lower().split(" ")
+def split_and_stem(s,stopword,tknz):
+	words = tknz.tokenize(s.lower())
 	word_set = set()
 	
 	for w in words:
@@ -50,19 +51,19 @@ def split_and_stem(s,stopword):
 def get_stopword():
 	# stopwords
 	stopword = stopwords.words("english")
-	stopword.extend(["journal","proceedings","conference","yearly","quarterly","monthly","weekly","research"])
+	stopword.extend(["journal","proceedings","conference","yearly","quarterly","monthly","weekly","research","studies","review"])
 	return stopword
 
 if __name__ == "__main__":
 	#ps = PorterStemmer()
 	stopword = get_stopword()
-
+	tknz = TweetTokenizer()
 	venues = load_venue(venue_path)
 	foss = load_fos(fos_path)
 	# turn fos string into set
 	fos_sets = {}
 	for key in foss:
-		fos_sets[key] = split_and_stem(foss[key],stopword)
+		fos_sets[key] = split_and_stem(foss[key],stopword,tknz)
 	mapping = {}
 	with open(fos_level_path,"rb") as fin:
 		fos_level = pickle.load(fin)
@@ -74,7 +75,7 @@ if __name__ == "__main__":
 		best_score = 0.0
 		best_hit = 0
 		best_fos = []
-		venue_set = split_and_stem(venue,stopword)
+		venue_set = split_and_stem(venue,stopword,tknz)
 		res = {}
 		# iterate over fos_sets
 		for fos in fos_sets:
