@@ -1,4 +1,5 @@
 import pickle
+import operator
 dir_path = "/mnt/ds3lab/yanping/mag/data"
 venue_path = dir_path+"/venue.pkl"
 fos_path = dir_path+"/FieldsOfStudy.txt"
@@ -17,8 +18,8 @@ with open(venue_path,"rb") as fin:
 			else:
 				venue_voc[w] = 1
 print("###venue vocabulary")
-for v in venue_voc:
-	print(v,venue_voc[v])
+for key, value in sorted(venue_voc.items(), key= operator.itemgetter(1)):
+	print(key,value)
 with open(venue_voc_path,"wb") as fout:
 	pickle.dump(venue_voc,fout,pickle.HIGHEST_PROTOCOL)
 
@@ -34,8 +35,8 @@ with open(fos_path,"r") as fin:
 			else:
 				fos_voc[w] = 1
 print("###fos vocabulary")
-for f in fos_voc:
-	print(f,fos_voc[f])
+for key, value in sorted(fos_voc.items(), key= operator.itemgetter(1)):
+	print(key,value)
 with open(fos_voc_path,"wb") as fout:
 	pickle.dump(fos_voc,fout,pickle.HIGHEST_PROTOCOL)
 
