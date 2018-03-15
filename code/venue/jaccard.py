@@ -32,7 +32,6 @@ def load_fos(path):
 	with open(path,"r") as fin:
 		for line in fin:
 			parts = line[:-1].split("\t")
-
 			dic[parts[0]] = parts[1]
 	return dic
 

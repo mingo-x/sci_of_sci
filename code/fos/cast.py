@@ -6,6 +6,7 @@ venue_fos_path = dir_path+"/venue_fos.pkl"
 fos_level_path = dir_path+"/fos_level.pkl"
 fos_parent_path = dir_path+"/fos_parent.pkl"
 out_path = dir_path+"/venue_fos_l1.pkl"
+fos_path = dir_path+"/FieldsOfStudy.txt"
 
 def get_pa(fos,fos_pa,fos_level,l):
 	pa = fos
@@ -19,6 +20,15 @@ def get_pa(fos,fos_pa,fos_level,l):
 			break
 	return pa
 
+def load_fos(path):
+	dic = {}
+	with open(path,"r") as fin:
+		for line in fin:
+			parts = line[:-1].split("\t")
+			dic[parts[0]] = parts[1]
+	return dic
+
+
 if __name__ == "__main__":
 	with open(fos_level_path,"rb") as fin:
 		fos_level = pickle.load(fin)
@@ -29,6 +39,7 @@ if __name__ == "__main__":
 	with open(fos_parent_path,"rb") as fin:
 		fos_pa = pickle.load(fin)
 
+	fos_id = load_fos(fos_path)
 	counter_0 = 0
 	counter_1 = 1
 	mapping = {}
@@ -58,6 +69,8 @@ if __name__ == "__main__":
 			'''
 		print("******",v,len(venue_fos[v]),len(cast_set))
 		mapping[v] = cast_set
+		for f in cast_set:
+			print("------",fos_id[f])
 
 	print("no FOS:",counter_0)
 	print("more than 1 FOS:",counter_1)
