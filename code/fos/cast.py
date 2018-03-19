@@ -18,7 +18,7 @@ def get_pa(fos,fos_pa,fos_level,l):
 			for ppa in ppas:
 				new_pas.add(ppa)
 		new_pas = list(new_pas)
-		print(fos,pas,new_pas)
+		print("l2 pa",fos,pas,new_pas)
 		pas = new_pas
 	return pas
 
