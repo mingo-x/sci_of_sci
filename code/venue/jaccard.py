@@ -40,13 +40,16 @@ def load_fos(path):
 def split_and_stem(s,stopword,tknz):
 	words = tknz.tokenize(s.lower())
 	word_set = set()
-	
+	and_flag = False
+
 	for w in words:
+		if w=="and":
+			and_flag = True
 		if w in stopword:
 			continue
 		word_set.add(stem(w))
 	#print(len(words),len(word_set))
-	return word_set
+	return word_set, and_flag
 
 def get_stopword():
 	# stopwords
@@ -72,11 +75,14 @@ if __name__ == "__main__":
 	counter_1 = 0
 	total = 0
 	start_time = time()
+	and_count = 0
 	for venue in venues:
 		best_score = 0.0
 		best_hit = 0
 		best_fos = []
-		venue_set = split_and_stem(venue,stopword,tknz)
+		venue_set, and_flag = split_and_stem(venue,stopword,tknz)
+		if and_flag:
+			and_count += 1
 		res = {}
 		# iterate over fos_sets
 		for fos in fos_sets:
@@ -102,6 +108,7 @@ if __name__ == "__main__":
 	print("0 FOS:",counter_0)
 	print("more than 1 FOS:",counter_1)
 	print("time:",time()-start_time)
+	print("venue with \'and\':", and_count)
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,fout,pickle.HIGHEST_PROTOCOL)
 
