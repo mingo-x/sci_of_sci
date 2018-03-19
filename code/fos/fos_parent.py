@@ -56,7 +56,7 @@ def read_hierarchy(path,fos_dic):
 		elif fos in hie[0]:
 			pas[fos] = hie[0][fos]
 		elif fos in hie[2]:
-			pas[fos] = hie[0][fos]
+			pas[fos] = hie[2][fos]
 		else:
 			pas[fos] = [fos]
 	return pas
