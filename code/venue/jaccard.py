@@ -43,7 +43,7 @@ def split_and_stem(s,stopword,tknz):
 	and_flag = False
 
 	for w in words:
-		if w=="and":
+		if w=="and" or w=="&":
 			and_flag = True
 		if w in stopword:
 			continue
