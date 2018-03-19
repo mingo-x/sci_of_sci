@@ -66,6 +66,8 @@ def read_hierarchy(path,fos_dic):
 if __name__ == "__main__":
 	fos_dic = load_fos(fos_path)
 	pas = read_hierarchy(hierarchy_file,fos_dic)
+	for fos in pas:
+		print(fos,pas[fos])
 	#pas = get_hierarchy(hierarchy_file)
 	with open(out_file,"wb") as fout:
 		pickle.dump(pas,fout,pickle.HIGHEST_PROTOCOL)
