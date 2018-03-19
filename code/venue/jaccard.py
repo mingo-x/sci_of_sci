@@ -67,7 +67,7 @@ if __name__ == "__main__":
 	# turn fos string into set
 	fos_sets = {}
 	for key in foss:
-		fos_sets[key] = split_and_stem(foss[key],stopword,tknz)
+		fos_sets[key], and_flag = split_and_stem(foss[key],stopword,tknz)
 	mapping = {}
 	with open(fos_level_path,"rb") as fin:
 		fos_level = pickle.load(fin)
