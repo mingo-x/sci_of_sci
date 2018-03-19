@@ -9,16 +9,18 @@ out_path = dir_path+"/venue_fos_l1.pkl"
 fos_path = dir_path+"/FieldsOfStudy.txt"
 
 def get_pa(fos,fos_pa,fos_level,l):
-	pa = fos
-	pa_level = fos_level[fos]
-	while pa_level>l:
-		if pa in fos_pa:
-			new_p = fos_pa[pa]
-			pa = new_p[0]
-			pa_level = new_p[1]
-		else:
-			break
-	return pa
+	pas = fos_pa[fos]
+	pa_level = fos_level[pas[0]]
+	if pa_level>l:
+		new_pas = set()
+		for pa in pas:
+			ppas = fos_pa[pa]
+			for ppa in ppas:
+				new_pas.add(ppa)
+		new_pas = list(new_pas)
+		print(fos,pas,new_pas)
+		pas = new_pas
+	return pas
 
 def load_fos(path):
 	dic = {}
@@ -46,10 +48,10 @@ if __name__ == "__main__":
 	for v in venue_fos:
 		cast_set = set()
 		for fos in venue_fos[v]:
-			pa = fos
-			if fos in fos_level and fos_level[fos]>1:
-				pa = get_pa(fos,fos_pa,fos_level,1)
-			cast_set.add(pa)
+			#pa = fos
+			#if fos in fos_level and fos_level[fos]>1:
+			pas = get_pa(fos,fos_pa,fos_level,1)
+			cast_set.update(pas)
 		#old_len = len(cast_set)
 		if len(cast_set) == 0:
 			counter_0 += 1
