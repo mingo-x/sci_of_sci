@@ -48,9 +48,9 @@ if __name__ == "__main__":
 	for v in venue_fos:
 		cast_set = set()
 		for fos in venue_fos[v]:
-			#pa = fos
-			#if fos in fos_level and fos_level[fos]>1:
-			pas = get_pa(fos,fos_pa,fos_level,1)
+			pas = [fos]
+			if fos in fos_level and fos_level[fos]>1:
+				pas = get_pa(fos,fos_pa,fos_level,1)
 			cast_set.update(pas)
 		#old_len = len(cast_set)
 		if len(cast_set) == 0:
