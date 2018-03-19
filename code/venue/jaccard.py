@@ -17,7 +17,12 @@ fos_level_path = dir_path+"/fos_level.pkl"
 
 # jaccard similarity
 def j_sim(venue,fos):
-	return 1.0*len(venue & fos)/len(venue | fos), len(venue & fos)
+	union = venue  | fos
+	intersection = venue & fos
+	if len(union)==0:
+		return 0.0, len(intersection)
+	else:
+		return 1.0*len(intersection)/len(union), len(intersection)
 
 # load venues
 def load_venue(path):
@@ -68,6 +73,8 @@ if __name__ == "__main__":
 	fos_sets = {}
 	for key in foss:
 		fos_sets[key], and_flag = split_and_stem(foss[key],stopword,tknz)
+		if len(fos_sets[key])==0:
+			print(key)
 	mapping = {}
 	with open(fos_level_path,"rb") as fin:
 		fos_level = pickle.load(fin)
@@ -81,6 +88,8 @@ if __name__ == "__main__":
 		best_hit = 0
 		best_fos = []
 		venue_set, and_flag = split_and_stem(venue,stopword,tknz)
+		if len(venue_set)==0:
+			print(venue)
 		if and_flag:
 			and_count += 1
 		res = {}
