@@ -103,12 +103,12 @@ if __name__ == "__main__":
 		for f in best_fos:
 			print("***",f,foss[f])
 		total += 1
-		if total == 1000:
-			break
+		#if total == 1000:
+		#	break
 	print("0 FOS:",counter_0)
 	print("more than 1 FOS:",counter_1)
 	print("time:",time()-start_time)
-	print("venue with \'and\':", and_count)
+	print("venue with \'and\':", and_count, "in total:", total)
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,fout,pickle.HIGHEST_PROTOCOL)
 
