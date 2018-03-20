@@ -101,8 +101,8 @@ if __name__ == "__main__":
 		res = {}
 		# iterate over fos_sets
 		for fos in fos_sets:
-			#score, hit = j_sim(venue_set,fos_sets[fos])
-			score, hit = c_sim(venue_set,fos_sets[fos])
+			score, hit = j_sim(venue_set,fos_sets[fos])
+			#score, hit = c_sim(venue_set,fos_sets[fos])
 			if score > best_score or (score==best_score and hit>best_hit):
 				best_score = score
 				best_hit = hit
