@@ -7,6 +7,7 @@ from stemming.porter2 import stem
 from time import time
 from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
+from nltk.stem.snowball import SnowballStemmer
 #from nltk.stem import PorterStemmer
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
@@ -42,7 +43,7 @@ def load_fos(path):
 	return dic
 
 # split string to set of words
-def split_and_stem(s,stopword,tknz):
+def split_and_stem(s,stopword,tknz,stemmer):
 	words = tknz.tokenize(s.lower())
 	word_set = set()
 	and_flag = False
@@ -52,19 +53,20 @@ def split_and_stem(s,stopword,tknz):
 			and_flag = True
 		if w in stopword:
 			continue
-		word_set.add(stem(w))
+		word_set.add(stemmer.stem(w))
 	#print(len(words),len(word_set))
 	return word_set, and_flag
 
 def get_stopword():
 	# stopwords
 	stopword = stopwords.words("english")
-	stopword.extend(["journal","proceedings","conference","yearly","quarterly","monthly","weekly","research","studies","review","&",
+	stopword.extend(["journal","journals","proceedings","conference","yearly","quarterly","monthly","weekly","research","studies","review","&",
 		",",":","-",".","(",")","\\","/"])
 	return stopword
 
 if __name__ == "__main__":
 	#ps = PorterStemmer()
+	stemmer = SnowballStemmer("english", ignore_stopwords=True)
 	stopword = get_stopword()
 	tknz = TweetTokenizer()
 	venues = load_venue(venue_path)
@@ -72,7 +74,7 @@ if __name__ == "__main__":
 	# turn fos string into set
 	fos_sets = {}
 	for key in foss:
-		fos_sets[key], and_flag = split_and_stem(foss[key],stopword,tknz)
+		fos_sets[key], and_flag = split_and_stem(foss[key],stopword,tknz,stemmer)
 		if len(fos_sets[key])==0:
 			print(key)
 	mapping = {}
@@ -87,7 +89,7 @@ if __name__ == "__main__":
 		best_score = 0.0
 		best_hit = 0
 		best_fos = []
-		venue_set, and_flag = split_and_stem(venue,stopword,tknz)
+		venue_set, and_flag = split_and_stem(venue,stopword,tknz,stemmer)
 		if len(venue_set)==0:
 			print(venue)
 		if and_flag:
@@ -112,8 +114,8 @@ if __name__ == "__main__":
 		for f in best_fos:
 			print("***",f,foss[f])
 		total += 1
-		#if total == 1000:
-		#	break
+		if total == 1000:
+			break
 	print("0 FOS:",counter_0)
 	print("more than 1 FOS:",counter_1)
 	print("time:",time()-start_time)
