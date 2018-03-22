@@ -37,6 +37,7 @@ for idx in range(9):
 						citation_graph.append([])
 						n_citation.append(-1)
 					paper_idx = paper_id_dict[paper_id]
+					#print("paper:",paper_id,paper_idx)
 					if "references" in a:
 						for r in a["references"]:
 							# if a new paper is encountered, give it an index
@@ -44,11 +45,12 @@ for idx in range(9):
 								paper_id_dict[r] = len(paper_id_dict)
 								citation_graph.append([])
 								n_citation.append(-1)
+								#print("ref:",r,paper_id_dict[r])
 							citation_graph[paper_id_dict[r]].append(paper_idx)
 					if "n_citation" in a:
 						n_citation[paper_idx] = a["n_citation"]
 			end_time = time.time()
-			print(end_time-start_time)
+			print(end_time-start_time,len(paper_id_dict))
 
 print("start writing out")
 with open(paper_id_path,"wb") as fout:
