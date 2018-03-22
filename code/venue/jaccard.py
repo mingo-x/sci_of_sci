@@ -8,6 +8,7 @@ from time import time
 from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
 from nltk.stem.snowball import SnowballStemmer
+from nltk.classify import textcat
 #from nltk.stem import PorterStemmer
 
 dir_path = "/mnt/ds3lab/yanping/mag/data"
@@ -76,6 +77,7 @@ if __name__ == "__main__":
 	venues = load_venue(venue_path)
 	foss = load_fos(fos_path)
 	prep_set = set(["of","and","&","in","on"])
+	cat = textcat.TextCat()
 	# turn fos string into set
 	fos_sets = {}
 	for key in foss:
