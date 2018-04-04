@@ -44,7 +44,7 @@ for idx in range(9):
 						edge_count += len(a["references"])
 					line_count += 1
 			end_time = time.time()
-			print(end_time-start_time,edge_count,line_count)
+			print("time",end_time-start_time,"#edges",edge_count,"#papers",line_count,"#cited papers",len(paper_id_dict))
 
 print("start writing out")
 with open(paper_id_path,"wb") as fout:
