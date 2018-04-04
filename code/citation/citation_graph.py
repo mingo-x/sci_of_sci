@@ -41,7 +41,7 @@ for idx in range(9):
 								paper_id_dict[r] = len(paper_id_dict)
 								citation_graph.append([])
 							citation_graph[paper_id_dict[r]].append(paper_id)
-					edge_count += len(a["references"])
+						edge_count += len(a["references"])
 					line_count += 1
 			end_time = time.time()
 			print(end_time-start_time,edge_count,line_count)
