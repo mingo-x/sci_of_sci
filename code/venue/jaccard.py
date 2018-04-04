@@ -143,8 +143,8 @@ if __name__ == "__main__":
 			print("***",f,foss[f])
 
 		total += 1
-		if total == 1000:
-			break
+		#if total == 1000:
+		#	break
 	print("0 FOS:",counter_0)
 	print("too many FOSs:",many_count)
 	print("duplicate FOSs:",dup_count)
