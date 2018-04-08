@@ -36,7 +36,8 @@ for idx in range(9):
 							if r not in id_idx_dict:
 								id_idx_dict[r] = len(id_idx_dict)
 							output_line += ","+str(id_idx_dict[r])
-						fout.write(output_line+"\n")
+						output_line += "\n"
+						fout.write(output_line.encode('utf-8'))
 						edge_count += len(a["references"])
 						
 			end_time = time.time()
