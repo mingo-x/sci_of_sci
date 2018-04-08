@@ -13,7 +13,7 @@ citation_idx_path = dir_path+"/citation_indexed.txt"
 
 id_idx_dict = {}
 edge_count = 0
-fout = open(citation_idx_path,"w")
+fout = open(citation_idx_path,"wb")
 for idx in range(9):
 	with ZipFile(dir_path+"/data/mag_papers_"+str(idx)+".zip", "r") as myzip:
 		zip_files = myzip.namelist()
