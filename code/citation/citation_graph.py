@@ -6,48 +6,37 @@ skip non-english papers
 skip papers never cited
 '''
 
-from zipfile import ZipFile
-import json
 import time
 import pickle
 
 dir_path = "/mnt/ds3lab/yanping/mag"
-paper_id_path = dir_path+"/paper_id.pkl"
+paper_cid_path = dir_path+"/paper_id.pkl"
 citation_graph_path = dir_path+"/citation_graph.pkl"
-n_citation_path = dir_path+"/n_citation.txt"
+citation_idx_path = dir_path+"/citation_indexed.txt"
 #paper_author_path = dir_path+"/paper_author.pkl" #[[]]
 
-paper_id_dict = {}
+paper_cid_dict = {}
 citation_graph = []
 edge_count = 0
-for idx in range(9):
-	with ZipFile(dir_path+"/data/mag_papers_"+str(idx)+".zip", "r") as myzip:
-		zip_files = myzip.namelist()
-		for file_name in zip_files:
-			print("zip",idx,file_name)
+with open(citation_graph_path,"rb") as fin:
+	start_time = time.time()
+	counter = 0
+	for line in fin:
+		terms = line.split(",")
+		citer = line[0]
+		for i in range(1,len(terms)): # for every citee
+			citee = terms[i]
+			if citee not in paper_cid_dict:
+				paper_cid_dict[citee] = len(citation_graph)
+				citation_graph.append([])
+			citation_graph[paper_cid_dict[citee]].append(citer)
+		counter += 1
+		if counter%1000000 == 0:
+			print("time",time.time()-start_time,"count",counter,"size",len(citation_graph))
 			start_time = time.time()
-			with myzip.open(file_name) as fin:
-				line_count = 0
-				for line in fin:
-					a = json.loads(line.decode('utf-8'))
-					# skip non-english papers
-					if "lang" in a and a["lang"]!="en":
-						continue
-					paper_id = a["id"]
-					if "references" in a:
-						for r in a["references"]:
-							# if a new paper is encountered, give it an index
-							if r not in paper_id_dict:
-								paper_id_dict[r] = len(paper_id_dict)
-								citation_graph.append([])
-							citation_graph[paper_id_dict[r]].append(paper_id)
-						edge_count += len(a["references"])
-					line_count += 1
-			end_time = time.time()
-			print("time",end_time-start_time,"#edges",edge_count,"#papers",line_count,"#cited papers",len(paper_id_dict))
 
 print("start writing out")
-with open(paper_id_path,"wb") as fout:
-	pickle.dump(paper_id_dict,fout,pickle.HIGHEST_PROTOCOL)
+with open(paper_cid_path,"wb") as fout:
+	pickle.dump(paper_cid_dict,fout,pickle.HIGHEST_PROTOCOL)
 with open(citation_graph_path,"wb") as fout:
 	pickle.dump(citation_graph,fout,pickle.HIGHEST_PROTOCOL)
