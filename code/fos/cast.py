@@ -44,6 +44,7 @@ if __name__ == "__main__":
 	fos_id = load_fos(fos_path)
 	counter_0 = 0
 	counter_1 = 1
+	counter_changed = 0
 	mapping = {}
 	for v in venue_fos:
 		cast_set = set()
@@ -59,6 +60,8 @@ if __name__ == "__main__":
 			counter_1 += 1
 
 		print("Venue:",v,len(venue_fos[v]),len(cast_set))
+		if len(venue_fos[v]) != len(cast_set):
+			counter_changed += 1
 		mapping[v] = cast_set
 		#print("FOS before casting:")
 		for f in venue_fos[v]:
@@ -69,6 +72,7 @@ if __name__ == "__main__":
 
 	print("no FOS:",counter_0)
 	print("more than 1 FOS:",counter_1)
+	print("size changed after casting", counter_changed)
 	with open(out_path,"wb") as fout:
 		pickle.dump(mapping,fout,pickle.HIGHEST_PROTOCOL)
 
