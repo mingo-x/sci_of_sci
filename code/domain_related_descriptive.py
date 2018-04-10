@@ -7,7 +7,7 @@ import time
 import pickle
 
 dir_path = "/mnt/ds3lab/yanping/mag/"
-venue_fos_mapping_path = dir_path+"data/venue_fos.pkl"
+venue_fos_mapping_path = dir_path+"data/venue_fos_l1.pkl"
 fos_npaper_path = dir_path+"data/fos_npaper.txt"
 
 with open(venue_fos_mapping_path,"rb") as fin: # load in the venue-fos mapping
