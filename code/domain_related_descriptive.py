@@ -34,7 +34,7 @@ for idx in range(9): # 9 zipped packages in total
 							if fos not in fos_npaper:
 								fos_npaper[fos] = 0
 							fos_npaper[fos] += 1
-							print(fos, fos_npaper)
+							print(fos, fos_npaper[fos])
 			end_time = time.time()
 			print("time",end_time-start_time,"#valid papers", paper_en_with_venue_counter)
 
