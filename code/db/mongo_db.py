@@ -4,7 +4,7 @@ import json
 import time
 import pickle
 
-client = MongoClient('mongodb://127.0.0.1:27017/',unicode_decode_error_handler='ignore')
+client = MongoClient()
 db = client.mag
 papers = db.papers
 dir_path = "/mnt/ds3lab/yanping/mag/"
