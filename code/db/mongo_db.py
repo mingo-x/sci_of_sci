@@ -23,6 +23,7 @@ for idx in range(1):
 					if "venue" not in a:
 						continue
 					_id = papers.insert_one(a)
+					print(_id)
 						
 			end_time = time.time()
 			print("time",end_time-start_time)
