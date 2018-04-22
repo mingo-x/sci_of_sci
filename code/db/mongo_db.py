@@ -35,7 +35,7 @@ for idx in range(1):
 						continue
 					else:
 						venue = a["venue"]
-						a["domain"] = venue_fos_mapping[venue]
+						a["domain"] = list(venue_fos_mapping[venue])
 						bulk.append(a)
 					
 					if len(bulk) == 10:
