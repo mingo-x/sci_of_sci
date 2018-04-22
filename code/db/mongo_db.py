@@ -18,7 +18,12 @@ bulk = []
 for idx in range(1):
 	with ZipFile(dir_path+"/data/mag_papers_"+str(idx)+".zip", "r") as myzip:
 		zip_files = myzip.namelist() # get the list of file names inside one zipped package
+		file_count = 0
 		for file_name in zip_files:
+			if file_count == 10:
+				break
+			else:
+				file_count += 1
 			print("zip",idx,file_name)
 			start_time = time.time()
 			with myzip.open(file_name) as fin:
